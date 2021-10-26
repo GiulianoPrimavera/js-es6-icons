@@ -20,30 +20,30 @@
 
 #main_container{
     background-color: lightgray;
-    height: 100vh;
     padding: 80px 200px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px
+    gap: 30px
 }
 
 .card{
-    width: calc(100% / 5 - 10px);
+    width: calc(100% / 5 - 30px);
     height: 200px;
-    background-color: gray;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    background-color: rgb(241, 241, 241);
+    border-radius: 20px;
+    padding: 10px;
 }
 .card .icon{
     padding: 5px;
 }
 .card i{
-    font-size: 150px;
+    font-size: 120px;
 }
 .card .icon_text{
-    margin: 5px 0;
+    margin: 20px 0;
     font-size: 25px;
 }
