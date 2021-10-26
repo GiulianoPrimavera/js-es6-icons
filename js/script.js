@@ -110,6 +110,8 @@ const icons =[
 
 //recupero il main container
 const mainContainer = document.getElementById("main_container");
+//recupero il select
+const select = document.getElementById("select");  
 
 //un oggetto contenente tante chiavi quanti sono i type degli oggetti nell'array "icons", ad ognuna di queste chiavi è associato un colore
 const colorMap = {
@@ -123,20 +125,18 @@ quindi viene restituita una stringa contenente il nome di un colore */
 
 /**
  * funzione che stampa le icone nella pagina
- * @param {[]} array
+ * @param {{}[]} array
  */
 function groupByType (icons){
-    console.log(icons);
-
     //creo un oggetto che conterrà tanti array per quanti sono i type presenti nell'array principale "icons"
     const objectByType = {};
-    console.log(objectByType);
 
     //ciclo sull'array
     for (let i = 0; i< icons.length; i++){
         //recupero le key di ogni oggetto all'interno dell'array con il destructuring
         let {name, prefix, type, family} = icons[i];
-        
+
+
         //se all'interno dell'oggetto "objectByType" non è presente una key con il nome type (destrutturato dall'array icons)
         //allora creo l'array all'interno dell'oggetto che come key ha il type recuperato dall'array icons 
         if (!objectByType[type]) {
@@ -152,9 +152,24 @@ function groupByType (icons){
         });
     }
     
-    console.log(objectByType);
+    console.log("object by type", objectByType);
     
     return objectByType;
 }
 
 groupByType(icons)
+
+function printCards (listToPrint){
+    for (let i = 0; i < listToPrint.length; i++){
+        const {name, prefix, type, family, color} = listToPrint[i];
+
+        mainContainer.innerHTML +=`<div class="card">
+                                        <div class="icon">  
+                                            <i class="${family} ${prefix}${name}" style="color: ${colorMap[type]}"></i>
+                                        </div>
+                                        <div class="icon_text"><h4>${type}</h4></div>
+                                    </div>
+    `
+    }
+}
+printCards(icons)
