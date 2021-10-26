@@ -111,6 +111,14 @@ const icons =[
 //recupero il main container
 const mainContainer = document.getElementById("main_container");
 
+//consigliata da Florian
+//un oggetto contenente tante chiavi quanti sono i type degli oggetti nell'arrai "icons", ad ognuna di queste chiavi è associato un colore
+const colorMap = {
+    "animal": "red",
+    "vegetable": "green",
+    "user": "purple"
+}
+
 /**
  * funzione che stampa le icone nella pagina
  * @param {[]} array
@@ -119,29 +127,25 @@ function stampIcons (array){
     //svuoto il main container
     mainContainer.innerHTML = "";
 
-    let colorIcon;
-
     //ciclo sull'array
     for (let i = 0; i< array.length; i++){
         //recupero le key di ogni oggetto all'interno dell'array
         let {name, prefix, type, family} = array[i];
 
-        if (type === "animal"){
-            colorIcon = "blue"
-        }else if(type === "vegetable"){
-            colorIcon = "green";
-        }else if(type === "user"){
-            colorIcon = "purple";
-        }
+        //chiamando il type (che è stato destrutturato), 
+        //in colorMap viene restituito il valore della chiave in colorMap (che è uguale al type dell'elemento sotto ciclo), 
+        //quindi viene restituita una stringa contenente il nome di un colore
+        console.log(colorMap[type]);
 
         //inserisco nel mainContainer l'html contenente la classe e il nome della card ciclata
         mainContainer.innerHTML += `<div class="card">
                                         <div class="icon">
-                                            <i class="${family} ${prefix}${name}" style="color: ${colorIcon}"></i>
+                                            <i class="${family} ${prefix}${name}" style="color: ${colorMap[type]}"></i>
                                         </div>
                                         <div class="icon_text"><h4>${name}</h4></div>
                                     </div>`
     }
+    console.log(colorMap);
 }
 
 stampIcons(icons)
