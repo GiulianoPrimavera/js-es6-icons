@@ -3,3 +3,20 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.logo{
+    padding: 10px;
+}
+.filter{
+    background-color: lightseagreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+#main_container{
+    background-color: lightgray;
+    height: 100vh;
+}
