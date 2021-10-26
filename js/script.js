@@ -111,41 +111,50 @@ const icons =[
 //recupero il main container
 const mainContainer = document.getElementById("main_container");
 
-//consigliata da Florian
-//un oggetto contenente tante chiavi quanti sono i type degli oggetti nell'arrai "icons", ad ognuna di queste chiavi è associato un colore
+//un oggetto contenente tante chiavi quanti sono i type degli oggetti nell'array "icons", ad ognuna di queste chiavi è associato un colore
 const colorMap = {
     "animal": "red",
     "vegetable": "green",
     "user": "purple"
 }
+/* quando chiamo colorMap[type], viene restituito il valore che, all'inteno dell'oggetto "colorMap",
+ha la chiave uguale al type dell'elemento preso in considerazione (che nel ciclo è destrutturato),
+quindi viene restituita una stringa contenente il nome di un colore */
 
 /**
  * funzione che stampa le icone nella pagina
  * @param {[]} array
  */
-function stampIcons (array){
-    //svuoto il main container
-    mainContainer.innerHTML = "";
+function groupByType (icons){
+    console.log(icons);
+
+    //creo un oggetto che conterrà tanti array per quanti sono i type presenti nell'array principale "icons"
+    const objectByType = {};
+    console.log(objectByType);
 
     //ciclo sull'array
-    for (let i = 0; i< array.length; i++){
-        //recupero le key di ogni oggetto all'interno dell'array
-        let {name, prefix, type, family} = array[i];
-
-        //chiamando il type (che è stato destrutturato), 
-        //in colorMap viene restituito il valore della chiave in colorMap (che è uguale al type dell'elemento sotto ciclo), 
-        //quindi viene restituita una stringa contenente il nome di un colore
-        console.log(colorMap[type]);
-
-        //inserisco nel mainContainer l'html contenente la classe e il nome della card ciclata
-        mainContainer.innerHTML += `<div class="card">
-                                        <div class="icon">
-                                            <i class="${family} ${prefix}${name}" style="color: ${colorMap[type]}"></i>
-                                        </div>
-                                        <div class="icon_text"><h4>${name}</h4></div>
-                                    </div>`
+    for (let i = 0; i< icons.length; i++){
+        //recupero le key di ogni oggetto all'interno dell'array con il destructuring
+        let {name, prefix, type, family} = icons[i];
+        
+        //se all'interno dell'oggetto "objectByType" non è presente una key con il nome type (destrutturato dall'array icons)
+        //allora creo l'array all'interno dell'oggetto che come key ha il type recuperato dall'array icons 
+        if (!objectByType[type]) {
+            objectByType[type] = [];
+        }
+        //all'interno dell'array, specificato come "type" che si trova all'interno dell'oggetto "objectByType",
+        //eseguo il push degli elementi che dovranno popolarlo
+        objectByType[type].push({
+            "name": name,
+            "prefix": prefix,
+            family,
+            color: colorMap[type]
+        });
     }
-    console.log(colorMap);
+    
+    console.log(objectByType);
+    
+    return objectByType;
 }
 
-stampIcons(icons)
+groupByType(icons)
