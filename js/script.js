@@ -107,3 +107,30 @@ const icons =[
 		family: 'fas'
 	}
 ];
+
+//recupero il main container
+const mainContainer = document.getElementById("main_container");
+
+/**
+ * funzione che stampa le icone nella pagina
+ * @param {[]} array
+ */
+function stampIcons (array){
+    //svuoto il main container
+    mainContainer.innerHTML = "";
+
+    //ciclo sull'array
+    for (let i = 0; i< array.length; i++){
+        //recupero le key di ogni oggetto all'interno dell'array
+        let {name, prefix, family} = array[i];
+        //inserisco nel mainContainer l'html contenente la classe e il nome della card ciclata
+        mainContainer.innerHTML += `<div class="card">
+                                        <div class="icon">
+                                            <i class="${family} ${prefix}${name}"></i>
+                                        </div>
+                                        <div class="icon_text"><h4>${name}</h4></div>
+                                    </div>`
+    }
+}
+
+stampIcons(icons)
